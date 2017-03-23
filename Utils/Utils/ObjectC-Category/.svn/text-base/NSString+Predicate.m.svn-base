@@ -1,0 +1,92 @@
+//
+//  NSString+Predicate.m
+//  YJCatogory
+//
+//  Created by BeijingHC on 15/7/14.
+//  Copyright (c) 2015年 BeijingHC. All rights reserved.
+//
+
+#import "NSString+Predicate.h"
+
+@implementation NSString (Predicate)
+
+- (BOOL)isUserName
+{
+    NSString *      regex = @"(^[A-Za-z0-9]{3,20}$)";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+//匹配一个6到20位长的字符串，其中只能包含大小写字母
+- (BOOL)isPassword
+{
+    NSString *      regex = @"^{6,20}$";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+- (BOOL)isEmail
+{
+    NSString *      regex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+- (BOOL)isUrl
+{
+    NSString *      regex = @"http(s)?:\\/\\/([\\w-]+\\.)+[\\w-]+(\\/[\\w- .\\/?%&=]*)?";
+    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [pred evaluateWithObject:self];
+}
+
+- (BOOL)isTelephone
+{
+    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    NSString * CM     = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    NSString * CU     = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    NSString * CT     = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
+    NSString * PHS    = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
+    NSPredicate *regextestcm     = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
+    NSPredicate *regextestcu     = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
+    NSPredicate *regextestct     = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    NSPredicate *regextestphs    = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", PHS];
+    
+    return  [regextestmobile evaluateWithObject:self]   ||
+    [regextestphs evaluateWithObject:self]      ||
+    [regextestct evaluateWithObject:self]       ||
+    [regextestcu evaluateWithObject:self]       ||
+    [regextestcm evaluateWithObject:self];
+}
+
+
+
+- (BOOL)isPureIn{
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
+- (BOOL)isPureFloat{
+    NSScanner* scan = [NSScanner scannerWithString:self];
+    float val;
+    return [scan scanFloat:&val] && [scan isAtEnd];
+}
+
+
+-(BOOL)isValidNumber
+{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    NSNumber *num = [formatter numberFromString:self];
+    return num!=nil;
+}
+
+
+@end
+
+
+
+

@@ -1,0 +1,15 @@
+PODS:
+  - CSNotificationView (0.5.4)
+  - MBProgressHUD (1.0.0)
+
+DEPENDENCIES:
+  - CSNotificationView
+  - MBProgressHUD
+
+SPEC CHECKSUMS:
+  CSNotificationView: 0792f5220163c2befaf1a9716aa3d5a7d6bd4fb1
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+
+PODFILE CHECKSUM: aff09344340ef1a9332a1271152b8ba7a6efc625
+
+COCOAPODS: 1.2.0.rc.1
